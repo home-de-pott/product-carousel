@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
-    return <h1 className="carousel">This is the carousel</h1>;
+    return <h1 className="carousel">This is the best carousel</h1>;
   }
 }
 
