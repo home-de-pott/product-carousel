@@ -13,7 +13,7 @@ module.exports = {
       ref: "origin/master",
       repo: "https://github.com/home-de-pott/product-carousel.git",
       path: "/home/ubuntu/product-carousel",
-      "post-deploy": "npm install && pm2 startOrRestart ecosystem.config.js"
+      'post-deploy': "npm install && pm2 startOrRestart ecosystem.config.js",
     }
   }
 };
