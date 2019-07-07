@@ -26,7 +26,8 @@
     "express": "^4.17.0",
     "mongoose": "^5.5.14",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-slick": "^0.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -34,7 +35,6 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
-    "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",

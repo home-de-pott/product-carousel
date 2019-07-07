@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import Carousel from './Carousel';
 
 class App extends Component {
   constructor(props) {
@@ -13,15 +14,7 @@ class App extends Component {
         <span className="carousel-title">
           Customers Who Viewed This Item Bought...
         </span>
-        <div className="carousel-container">
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-        </div>
+        <Carousel />
       </div>
     );
   }

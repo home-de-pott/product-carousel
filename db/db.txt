@@ -1,0 +1,17 @@
+what data do i need?
+
+Get main item id --> related items
+
+Two tables: products, related products
+
+Related products has: 
+    product_id, 
+    related_product_id
+
+products has:
+    id
+    location of main photo    
+    Brand
+    description
+    price
+    
