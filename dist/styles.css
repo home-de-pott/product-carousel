@@ -36,7 +36,6 @@
   border: 1px solid #333;
   border-radius: 50%;
   text-align: center;
-  /* background-color: #333; */
 }
 
 .carousel-item {
@@ -51,16 +50,20 @@
   white-space: normal;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .carousel-item__photo {
+  display: block;
+  object-fit: contain;
   width: 100%;
+  height: auto;
   margin: 0 0 10px;
 }
 
 .carousel-item__description {
   line-height: 1em;
-  height: 4.2em;
+  height: 8rem;
 }
 
 .carousel-item__brand {
@@ -117,4 +120,14 @@
   border: 1px solid #ccc;
   padding: 15px 10px;
   cursor: pointer;
+}
+
+/* stars */
+.yellow {
+  color: #f96302;
+}
+
+.carousel-item__reviews {
+  font-size: 0.72rem;
+  vertical-align: 20%;
 }

@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Item from './Item';
 import Arrow from './Arrow';
 
-function Carousel() {
+function Carousel({ products, getRelatedProducts }) {
   const settings = {
     dots: false,
     infinite: false,
@@ -13,7 +13,6 @@ function Carousel() {
     initialSlide: 0,
     prevArrow: <Arrow />,
     nextArrow: <Arrow />,
-    // arrows: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -44,24 +43,13 @@ function Carousel() {
   };
   return (
     <Slider {...settings}>
-      <div>
-        <Item />
-      </div>
-      <div>
-        <Item />
-      </div>
-      <div>
-        <Item />
-      </div>
-      <div>
-        <Item />
-      </div>
-      <div>
-        <Item />
-      </div>
-      <div>
-        <Item />
-      </div>
+      {products.map(product => (
+        <Item
+          key={product.ID}
+          product={product}
+          getRelatedProducts={getRelatedProducts}
+        />
+      ))}
     </Slider>
   );
 }
