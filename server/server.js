@@ -22,6 +22,7 @@ app.get('/product-data/:id', async (req, res) => {
     res.status(200).end(JSON.stringify(relatedProducts));
   } catch (error) {
     console.error(error);
+    res.status(500).end();
   }
 });
 

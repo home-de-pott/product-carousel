@@ -19,7 +19,7 @@ function Carousel({ products, getRelatedProducts }) {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 3,
-          infinite: true,
+          infinite: false,
           dots: true,
         },
       },
@@ -29,6 +29,7 @@ function Carousel({ products, getRelatedProducts }) {
           slidesToShow: 3,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: false,
         },
       },
       {
@@ -36,6 +37,7 @@ function Carousel({ products, getRelatedProducts }) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: false,
           centerMode: true,
         },
       },
