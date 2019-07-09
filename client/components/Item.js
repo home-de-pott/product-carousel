@@ -1,37 +1,61 @@
 import React from 'react';
+import Rating from 'react-rating';
 
-const handleAddToCart = function(id){
-    window.dispatchEvent(new CustomEvent('addToCart', {
+const Item = ({ product, getRelatedProducts }) => {
+  const price = product.price.split('.');
+  const dollars = price[0];
+  const cents = price[1] || '00';
+
+  const handleAddToCart = function(id, event) {
+    event.stopPropagation();
+    window.dispatchEvent(
+      new CustomEvent('addToCart', {
         detail: {
-            id
-        }
-    }))
-}
+          id,
+        },
+      })
+    );
+  };
 
-const Item = props => {
   return (
-    <div className={"carousel-item" + (props.left ? " left" : "")}>
+    <div
+      className="carousel-item"
+      onClick={() => {
+        getRelatedProducts(product.ID);
+      }}
+    >
       <img
         className="carousel-item__photo"
-        src="https://images.homedepot-static.com/productImages/c275d0bb-5e98-412c-b1b1-8726fd1f1477/svn/dewalt-claw-hammers-dwht51054-64_300.jpg"
-        alt="HDX Hammer"
+        src={product.photo}
+        alt={product.name}
       />
       <div className="carousel-item__description">
-        <span className="carousel-item__brand">HDX </span>
-        16 oz. Fiberglass Handle Hammer
+        <span className="carousel-item__brand">{product.brand} </span>
+        {product.name}
       </div>
-      <div className="carousel-item__stars">***** (number)</div>
+      <div className="carousel-item__stars">
+        <Rating
+          initialRating={3.5}
+          readonly={true}
+          emptySymbol="fa fa-star-o fa-1x yellow"
+          fullSymbol="fa fa-star fa-1x yellow"
+          fractions={2}
+        />
+        <span className="carousel-item__reviews"> (270)</span>
+      </div>
       <div className="carousel-item__price">
         <span className="$ price">$</span>
-        <span className="dollars">5</span>
-        <span className="cents price">97</span>
+        <span className="dollars">{dollars}</span>
+        <span className="cents price">{cents}</span>
         <span className="each">/each</span>
       </div>
-      <button 
-      className="add-to-cart"
-      onClick={()=>handleAddToCart(props.itemId)}
+
+      <button
+        className="add-to-cart"
+        type="button"
+        onClick={event => handleAddToCart(product.ID, event)}
       >
-          Add To Cart
+        Add To Cart
       </button>
     </div>
   );
