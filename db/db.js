@@ -2,21 +2,7 @@ const mysql = require('mysql');
 const Promise = require('bluebird');
 
 const data = require('../utils/data.json');
-
-const makeRelatedItems = function() {
-  const relatedItems = [];
-  //populate related items table with random data
-  for (let product of data) {
-    const numberOfRelatedItems = Math.random() * 7;
-    for (let i = 0; i < numberOfRelatedItems; i++) {
-      const randomItemIndex = Math.floor(Math.random() * data.length);
-      console.log(randomItemIndex);
-      const randomID = data[randomItemIndex].ID;
-      relatedItems.push([product.ID, randomID]);
-    }
-  }
-  return Array.from(new Set(relatedItems));
-};
+const relatedItems = require('../utils/relatedItems.json');
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -39,11 +25,11 @@ db.queryAsync('CREATE DATABASE IF NOT EXISTS products')
   })
   .then(() => {
     db.queryAsync(`CREATE TABLE IF NOT EXISTS products (
-          ID varchar(255) not null,
+          ID varchar(20) not null,
           name varchar(255),
           price varchar(255),
           brand varchar(255),
-          photo varchar(255),
+          photo varchar(500),
           primary key (ID)
       )`);
   })
@@ -57,27 +43,26 @@ db.queryAsync('CREATE DATABASE IF NOT EXISTS products')
     console.log('Database and tables created');
   })
   .then(() => {
-    // const promisifiedData = data.map(product => {
-    //   return db.queryAsync(
-    //     `INSERT INTO products values ("${product.ID}", "${product.name}", "${product.price}", "${product.brand}", "${product.mainPhoto}")`
-    //   );
-    // });
-    // Promise.all(promisifiedData).then(results => {
-    //   console.log(results);
-    // });
+    const promisifiedData = data.map(product => {
+      return db.queryAsync(
+        `INSERT INTO products (ID, name, price, brand, photo) values ("${product.ID}", "${product.name}", "${product.price}", "${product.brand}", "${product.mainPhoto}")`
+      );
+    });
+    Promise.all(promisifiedData).then(results => {
+      console.log(results);
+    });
   })
   .then(() => {
-    // const relatedItems = makeRelatedItems();
-    // const promisified = relatedItems.map(pair => {
-    //   return db.queryAsync(
-    //     `INSERT INTO related_products values ("${pair[0]}", "${pair[1]}")`
-    //   );
-    // });
-    // return Promise.all(promisified);
+    const promisified = relatedItems.map(pair => {
+      return db.queryAsync(
+        `INSERT INTO related_products values ("${pair[0]}", "${pair[1]}")`
+      );
+    });
+    return Promise.all(promisified);
   })
-  //   .then(results => {
-  //     console.log(results);
-  //   })
+  .then(() => {
+    console.log('Database seeded');
+  })
   .catch(err => {
     console.error(err);
   });

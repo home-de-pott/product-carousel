@@ -10,12 +10,7 @@ const fakeData = [
 
 const http = {
   productData: {
-    get: async function() {
-      const result = await new Promise(resolve => {
-        resolve(fakeData);
-      });
-      return result;
-    },
+    get: jest.fn().resolves,
   },
 };
 

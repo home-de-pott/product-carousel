@@ -1,0 +1,6 @@
+App
+    -After mounting, axios gets related products
+    -it renders data for each product
+    -It renders product brand, name, price, rating, and photo
+    -it gets new products when a product is clicked
+    -it fires added-to-cart event when add to cart button is clicked

@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "start": "webpack -d --watch & live-server --port=3030 --watch=dist --open=dist",
     "restart": "pm2 startOrRestart ecosystem.config.js",
     "deploy": "pm2 deploy ecosystem.config.js production"
@@ -21,6 +21,7 @@
   "homepage": "http://www.github.com",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "ajv": "^6.10.1",
     "axios": "^0.19.0",
     "babel-jest": "^24.8.0",
     "bluebird": "^3.5.5",
@@ -43,6 +44,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",
@@ -50,6 +53,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "jest": "^24.8.0",
+    "jest-enzyme": "^7.0.2",
     "live-server": "^1.2.1",
     "nodemon": "^1.19.0",
     "path": "^0.12.7",
