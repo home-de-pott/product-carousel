@@ -13,6 +13,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('getProduct', async event => {
+      console.log('gettingProduct', event.detail);
+      this.getRelatedProducts(event.detail.id);
+    });
     const productId = window.location.pathname.slice(10);
     console.log('Getting', productId);
     this.getRelatedProducts(productId);
@@ -20,8 +24,7 @@ class App extends Component {
 
   async getRelatedProducts(id) {
     //history.pushState changes the url without triggering a refresh
-    history.pushState({}, null, '/products/' + id);
-    window.dispatchEvent(new CustomEvent('getProduct', { detail: { id } }));
+
     try {
       const products = await http.productData.get(id);
       this.setState({ products });

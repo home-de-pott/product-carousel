@@ -16,12 +16,15 @@ const Item = ({ product, getRelatedProducts }) => {
       })
     );
   };
-
+  const handleGetProduct = id => {
+    history.pushState({}, null, '/products/' + id);
+    window.dispatchEvent(new CustomEvent('getProduct', { detail: { id } }));
+  };
   return (
     <div
       className="carousel-item"
       onClick={() => {
-        getRelatedProducts(product.ID);
+        handleGetProduct(product.ID);
       }}
     >
       <img
