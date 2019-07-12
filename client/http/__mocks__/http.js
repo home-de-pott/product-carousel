@@ -1,16 +1,14 @@
-const fakeData = [
-  {
-    ID: '1',
-    name: 'hammer',
-    brand: 'dewalt',
-    price: '1.99',
-    photo: 'someurl',
-  },
-];
+import testData from './testData';
 
 const http = {
   productData: {
-    get: jest.fn().resolves,
+    get: function(id) {
+      console.log('FROM HTTP', id);
+      if (id === 1) {
+        return [testData[0]];
+      }
+      return testData;
+    },
   },
 };
 

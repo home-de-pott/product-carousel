@@ -10,7 +10,7 @@ const products = require('../model/products');
 
 const port = process.env.PORT || 3000;
 
-//middleware
+// middleware
 app.use(bodyParser.json());
 app.use('/products/:id', express.static(__dirname + '/../dist'));
 
