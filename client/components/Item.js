@@ -1,27 +1,17 @@
 import React from 'react';
 import Rating from 'react-rating';
+import handle from '../handlers/handle';
 
-const Item = ({ product, getRelatedProducts }) => {
+const Item = ({ product }) => {
   const price = product.price.split('.');
   const dollars = price[0];
   const cents = price[1] || '00';
-
-  const handleAddToCart = function(id, event) {
-    event.stopPropagation();
-    window.dispatchEvent(
-      new CustomEvent('addToCart', {
-        detail: {
-          id,
-        },
-      })
-    );
-  };
 
   return (
     <div
       className="carousel-item"
       onClick={() => {
-        getRelatedProducts(product.ID);
+        handle.getProduct(product.ID);
       }}
     >
       <img
@@ -53,7 +43,7 @@ const Item = ({ product, getRelatedProducts }) => {
       <button
         className="add-to-cart"
         type="button"
-        onClick={event => handleAddToCart(product.ID, event)}
+        onClick={event => handle.addToCart(product.ID, event)}
       >
         Add To Cart
       </button>

@@ -2,8 +2,6 @@ const csvFilePath = '../db/csvData.csv';
 const csv = require('csvtojson');
 const fs = require('fs');
 
-let data = [];
-
 csv()
   .fromFile(csvFilePath)
   .then(jsonObj => {

@@ -13,18 +13,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('getProduct', event => {
+      this.getRelatedProducts(event.detail.id);
+    });
     const productId = window.location.pathname.slice(10);
-    console.log('Getting', productId);
+    console.log('Component did mount. Getting', productId);
     this.getRelatedProducts(productId);
   }
 
   async getRelatedProducts(id) {
-    //history.pushState changes the url without triggering a refresh
-    history.pushState({}, null, '/products/' + id);
-    window.dispatchEvent(new CustomEvent('getProduct', { detail: { id } }));
+    console.log('gettingProduct', id);
     try {
       const products = await http.productData.get(id);
-      this.setState({ products });
+      await this.setState({ products });
+      return;
     } catch (error) {
       console.error(error);
     }

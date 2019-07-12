@@ -1,0 +1,7 @@
+biggest challenge
+testing components that render after making asynchronous api calls
+two problems: you don't want to actually make the api call, and you need to wait until the component renders to test it.
+
+The first problem I solved by mocking my http module. I tried third party packages like moxios and nock, but in then end I solved the problem by mocking the http module by hand.
+
+The second problem was figuring out how to pause the testing until the component renders with the data from the api call. For that I used a package called async-wait-until.

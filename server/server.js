@@ -10,7 +10,7 @@ const products = require('../model/products');
 
 const port = process.env.PORT || 3000;
 
-//middleware
+// middleware
 app.use(bodyParser.json());
 app.use('/products/:id', express.static(__dirname + '/../dist'));
 
@@ -22,6 +22,7 @@ app.get('/product-data/:id', async (req, res) => {
     res.status(200).end(JSON.stringify(relatedProducts));
   } catch (error) {
     console.error(error);
+    res.status(500).end();
   }
 });
 
