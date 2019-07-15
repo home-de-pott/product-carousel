@@ -16,9 +16,12 @@ class App extends Component {
     window.addEventListener('getProduct', event => {
       this.getRelatedProducts(event.detail.id);
     });
+    //if path includes id parameter, get related products
     const productId = window.location.pathname.slice(10);
-    console.log('Component did mount. Getting', productId);
-    this.getRelatedProducts(productId);
+    if (productId) {
+      console.log('Component did mount. Getting', productId);
+      this.getRelatedProducts(productId);
+    }
   }
 
   async getRelatedProducts(id) {
