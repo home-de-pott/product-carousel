@@ -28,6 +28,7 @@ class App extends Component {
     console.log('gettingProduct', id);
     try {
       const products = await http.productData.get(id);
+      console.log('Got related products', products);
       await this.setState({ products });
       return;
     } catch (error) {
