@@ -9,7 +9,7 @@ const Item = ({ product }) => {
 
   return (
     <div
-      className="carousel-item"
+      className="carousel-item-brian"
       onClick={() => {
         handle.getProduct(product.ID);
       }}
