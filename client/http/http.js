@@ -5,7 +5,9 @@ const http = {
     get: async function(id) {
       console.log('Getting', id);
       try {
-        const response = await axios.get('/product-data/' + id);
+        const response = await axios.get(
+          'http://localhost:3000/product-data/' + id
+        );
         return response.data;
       } catch (error) {
         console.error(error);

@@ -9,4 +9,8 @@ module.exports = {
     );
     return product;
   },
+  getAll: async function() {
+    const products = await db.queryAsync(`SELECT * FROM products`);
+    return products;
+  },
 };
