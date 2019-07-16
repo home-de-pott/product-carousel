@@ -17,6 +17,11 @@ db.connectAsync()
     console.log('Connected');
     db.queryAsync('USE MmJeIF53DX');
   })
+  .then(() => {
+    setInterval(function() {
+      db.query('SELECT * From products');
+    }, 60 * 1000);
+  })
   //   .then(() => {
   //     db.queryAsync(`CREATE TABLE IF NOT EXISTS products (
   //         ID varchar(20) not null,
