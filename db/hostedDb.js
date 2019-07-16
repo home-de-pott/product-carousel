@@ -22,13 +22,13 @@ db.connectAsync()
     // db.queryAsync('USE MmJeIF53DX');
     db.queryAsync('USE baembry');
   })
-  // .then(() => {
-  //   setInterval(function() {
-  //     db.query('SELECT 1 From products', () => {
-  //       console.log('DB queried');
-  //     });
-  //   }, 60 * 1000 * 3);
-  // })
+  .then(() => {
+    setInterval(function() {
+      db.query('SELECT 1 From products', () => {
+        console.log('DB queried');
+      });
+    }, 60 * 1000 * 3);
+  })
   // .then(() => {
   //   db.queryAsync(`CREATE TABLE IF NOT EXISTS products (
   //         ID varchar(20) not null,

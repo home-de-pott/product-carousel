@@ -9,7 +9,7 @@ const http = {
   productData: {
     get: async function(id) {
       try {
-        const response = await axios.get(localUrl + id);
+        const response = await axios.get(deploymentUrl + id);
         console.log('Response', response);
         return response.data;
       } catch (error) {
