@@ -1,5 +1,7 @@
 import '@babel/polyfill';
 
+import css from '../dist/styles.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.js';
