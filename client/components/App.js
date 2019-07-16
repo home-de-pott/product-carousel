@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(window.location.pathname);
     //add scripts to document
     this.appendScript('https://kit.fontawesome.com/af1dfc4933.js');
     this.appendStylesheet(
@@ -52,7 +53,7 @@ class App extends Component {
     console.log('gettingProduct', id);
     try {
       const products = await http.productData.get(id);
-      console.log('Got related products', products);
+      console.log('Got related products');
       await this.setState({ products });
       return;
     } catch (error) {

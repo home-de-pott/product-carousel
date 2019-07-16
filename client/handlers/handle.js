@@ -1,4 +1,5 @@
 const addToCart = function(id, event) {
+  console.log('adding to cart', id);
   event.stopPropagation();
   window.dispatchEvent(
     new CustomEvent('addToCart', {
