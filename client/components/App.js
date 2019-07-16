@@ -13,6 +13,15 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(window.location.pathname);
+    //add scripts to document
+    this.appendScript('https://kit.fontawesome.com/af1dfc4933.js');
+    this.appendStylesheet(
+      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+    );
+    this.appendStylesheet(
+      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+    );
     window.addEventListener('getProduct', event => {
       this.getRelatedProducts(event.detail.id);
     });
@@ -24,11 +33,27 @@ class App extends Component {
     }
   }
 
+  appendScript(url) {
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  appendStylesheet(url) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.charset = 'UTF-8';
+    link.href = url;
+    document.head.appendChild(link);
+  }
+
   async getRelatedProducts(id) {
     console.log('gettingProduct', id);
     try {
       const products = await http.productData.get(id);
-      console.log('Got related products', products);
+      console.log('Got related products');
       await this.setState({ products });
       return;
     } catch (error) {
