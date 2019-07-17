@@ -21,13 +21,6 @@ db.connectAsync()
     console.log('Connected');
     db.queryAsync('USE baembry');
   })
-  // .then(() => {
-  //   setInterval(function() {
-  //     db.query('SELECT 1 From products', () => {
-  //       console.log('DB queried');
-  //     });
-  //   }, 60 * 1000 * 3);
-  // })
   .then(() => {
     db.queryAsync(`CREATE TABLE IF NOT EXISTS products (
           ID varchar(20) not null,
