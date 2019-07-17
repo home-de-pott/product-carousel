@@ -9,7 +9,6 @@ class App extends Component {
     this.state = {
       products: [],
     };
-    this.getRelatedProducts = this.getRelatedProducts.bind(this);
   }
 
   componentDidMount() {
@@ -22,13 +21,13 @@ class App extends Component {
       'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
     );
     window.addEventListener('getProduct', event => {
-      this.getRelatedProducts(event.detail.id);
+      this.getProducts(event.detail.id);
     });
     //if path includes id parameter, get related products
     const productId = window.location.pathname.slice(10);
     if (productId) {
       console.log('Component did mount. Getting', productId);
-      this.getRelatedProducts(productId);
+      this.getProducts(productId);
     }
   }
 
@@ -48,7 +47,7 @@ class App extends Component {
     document.head.appendChild(link);
   }
 
-  async getRelatedProducts(id) {
+  async getProducts(id) {
     console.log('gettingProduct', id);
     try {
       const products = await http.productData.get(id);

@@ -25,8 +25,6 @@ describe('<App />', () => {
     doc = document.createElement('div');
     window.history.pushState({}, 'useless title', '/products/123');
     app = ReactDOM.render(<App />, doc);
-    // app = mount(<App />);
-    //wait until componentDidMount
     await waitUntil(() => cdmSpy.callCount === 1);
   });
 
@@ -68,6 +66,7 @@ describe('<App />', () => {
     expect(app.state.products.length).toBe(1);
   });
 
+  //the following fails to work because click handler isn't called on button.click()
   // it('fires add to cart event when add to cart button is clicked', () => {
   //   const spyListener = sinon.spy();
   //   const fakeEvent = {
