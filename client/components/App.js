@@ -15,7 +15,6 @@ class App extends Component {
   componentDidMount() {
     console.log(window.location.pathname);
     //add scripts to document
-    this.appendScript('https://kit.fontawesome.com/af1dfc4933.js');
     this.appendStylesheet(
       'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
     );
