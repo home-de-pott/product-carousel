@@ -1,5 +1,6 @@
 import React from 'react';
 import Rating from 'react-rating';
+import Stars from './Stars';
 import handle from '../handlers/handle';
 
 const Item = ({ product }) => {
@@ -29,8 +30,8 @@ const Item = ({ product }) => {
         <Rating
           initialRating={3.5}
           readonly={true}
-          emptySymbol="fa fa-star-o fa-1x yellow"
-          fullSymbol="fa fa-star fa-1x yellow"
+          emptySymbol={<span style={{ color: '#f96302' }}>&#9734;</span>}
+          fullSymbol={<span style={{ color: '#f96302' }}>&#9733;</span>}
           fractions={2}
         />
         <span className="carousel-item__reviews"> (270)</span>

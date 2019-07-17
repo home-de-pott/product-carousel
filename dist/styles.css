@@ -71,6 +71,34 @@
   font-weight: 700;
 }
 
+.carousel__starsContainer {
+  text-align: center;
+  margin-top: -27px;
+}
+
+​.carouselstars::before,
+.carouselstars span::before {
+  content: '\2605\2605\2605\2605\2605';
+  display: block;
+}
+
+​ div.carouselstars span {
+  color: #f96302;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+​ div.carouselstars {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 20px;
+  color: #ccc;
+  position: relative;
+  margin-top: -15px;
+}
+
 .carousel-item__stars,
 .carousel-item__price {
   margin: 0 0 15px;
