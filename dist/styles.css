@@ -71,35 +71,29 @@
   font-weight: 700;
 }
 
-.carousel__starsContainer {
-  text-align: center;
-  margin-top: -27px;
-}
-
-​.carouselstars::before,
-.carouselstars span::before {
-  content: '\2605\2605\2605\2605\2605';
-  display: block;
-}
-
-​ div.carouselstars span {
+.carousel__stars-container {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
   color: #f96302;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
 }
 
-​ div.carouselstars {
+/* I am baffled by the failure of these selectors to work; resorting to inline styles */
+/* .carousel__empty-stars {
   display: inline-block;
-  font-family: Wingdings;
   font-size: 20px;
   color: #ccc;
   position: relative;
   margin-top: -15px;
 }
+​ .carousel__empty-stars .carousel__stars {
+  color: #f96302;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+} */
 
-.carousel-item__stars,
 .carousel-item__price {
   margin: 0 0 15px;
   height: 45px;
@@ -111,7 +105,7 @@
 }
 
 .price {
-  vertical-align: super;
+  vertical-align: 30%;
   font-size: 1rem;
 }
 
@@ -149,14 +143,4 @@
   border: 1px solid #ccc;
   padding: 15px 10px;
   cursor: pointer;
-}
-
-/* stars */
-.yellow {
-  color: #f96302;
-}
-
-.carousel-item__reviews {
-  font-size: 0.72rem;
-  vertical-align: 20%;
 }

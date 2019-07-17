@@ -17,7 +17,6 @@ db.connect(function(err) {
   console.log('Connected to DB!');
 });
 
-// db.queryAsync('DROP DATABASE products');
 //make db
 db.queryAsync('CREATE DATABASE IF NOT EXISTS products')
   .then(() => {

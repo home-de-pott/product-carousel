@@ -1,20 +1,18 @@
 import React from 'react';
 
-const Stars = ({ rating }) => {
+const Stars = ({ rating, numberOfRatings }) => {
   return (
-    <div className="carousel__starsContainer">
-      <div
-        className="carouselstars"
+    <div className="carousel__stars-container">
+      <span
+        className="carousel__empty-stars"
         style={{
           display: 'inline-block',
-          fontFamily: 'Wingdings',
-          fontSize: '20px',
-          color: '#ccc',
           position: 'relative',
-          marginTop: '-15px',
         }}
       >
+        &#9734;&#9734;&#9734;&#9734;&#9734;
         <span
+          className="carousel__stars full-stars"
           style={{
             width: (rating / 5) * 100 + '%',
             color: '#f96302',
@@ -23,8 +21,11 @@ const Stars = ({ rating }) => {
             left: '0',
             overflow: 'hidden',
           }}
-        ></span>
-      </div>
+        >
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+        </span>
+      </span>
+      <span> ({numberOfRatings})</span>
     </div>
   );
 };

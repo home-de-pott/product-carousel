@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Item from './Item';
 import Arrow from './Arrow';
 
-function Carousel({ products, getRelatedProducts }) {
+function Carousel({ products }) {
   const settings = {
     dots: false,
     infinite: false,
@@ -46,11 +46,7 @@ function Carousel({ products, getRelatedProducts }) {
   return (
     <Slider {...settings}>
       {products.map(product => (
-        <Item
-          key={product.ID}
-          product={product}
-          getRelatedProducts={getRelatedProducts}
-        />
+        <Item key={product.ID} product={product} />
       ))}
     </Slider>
   );

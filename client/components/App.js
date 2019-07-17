@@ -66,10 +66,7 @@ class App extends Component {
         <span className="carousel-title">
           Customers Who Viewed This Item Bought...
         </span>
-        <Carousel
-          products={this.state.products}
-          getRelatedProducts={this.getRelatedProducts}
-        />
+        <Carousel products={this.state.products} />
       </div>
     );
   }
