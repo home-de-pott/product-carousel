@@ -4,9 +4,11 @@ import handle from '../handlers/handle';
 
 const Item = ({ product }) => {
   const price = product.price.split('.');
-  const dollars = price[0];
-  const cents = price[1] || '00';
-
+  let dollars = price[0];
+  let cents = price[1] || '00';
+  if (cents.length === 1) {
+    cents += '0';
+  }
   return (
     <div
       className="carousel-item-brian"
