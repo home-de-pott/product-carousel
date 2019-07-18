@@ -8,18 +8,19 @@ class App extends Component {
     super(props);
     this.state = {
       products: [],
+      title: 'No recently viewed items...',
     };
   }
 
   componentDidMount() {
     console.log(window.location.pathname);
     //add scripts to document
-    this.appendStylesheet(
-      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-    );
-    this.appendStylesheet(
-      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-    );
+    // this.appendStylesheet(
+    //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+    // );
+    // this.appendStylesheet(
+    //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+    // );
     window.addEventListener('getProduct', event => {
       this.getProducts(event.detail.id);
     });
@@ -27,10 +28,14 @@ class App extends Component {
     const productId = window.location.pathname.slice(10);
     if (productId) {
       console.log('Component did mount. Getting', productId);
+      this.setState({ title: 'Customers who viewed this item also bought...' });
       this.getProducts(productId);
+    } else {
+      this.getRecentlyViewed();
     }
   }
 
+  //clean this up
   appendScript(url) {
     const script = document.createElement('script');
     script.src = url;
@@ -50,9 +55,32 @@ class App extends Component {
   async getProducts(id) {
     console.log('gettingProduct', id);
     try {
-      const products = await http.productData.get(id);
+      const products = await http.relatedProducts.get(id);
       console.log('Got related products');
+      if (!products) {
+        console.log('no products');
+        return;
+      }
       await this.setState({ products });
+      return;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getRecentlyViewed() {
+    console.log('getting recently viewed');
+    try {
+      const products = await http.recentlyViewedProducts.get();
+      console.log('Got recently viewed products');
+      if (!products) {
+        console.log('no recently viewed products');
+        return;
+      }
+      await this.setState({
+        products,
+        title: 'Recently viewed products...',
+      });
       return;
     } catch (error) {
       console.error(error);
@@ -62,9 +90,9 @@ class App extends Component {
   render() {
     return (
       <div className="carousel">
-        <span className="carousel-title">
-          Customers Who Viewed This Item Bought...
-        </span>
+        <div className="carousel-title__container">
+          <span className="carousel-title">{this.state.title}</span>
+        </div>
         <Carousel products={this.state.products} />
       </div>
     );
