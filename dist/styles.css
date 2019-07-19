@@ -8,9 +8,10 @@
 }
 
 .carousel-title {
+  display: inline-block;
   font-size: 2rem;
   border-bottom: 4px solid #f96302;
-  padding: 0;
+  margin: 0 0 -3px 0;
 }
 
 .carousel-title__container {
