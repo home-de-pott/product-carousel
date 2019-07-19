@@ -10,7 +10,7 @@ module.exports = {
     return product;
   },
   getAll: async function() {
-    const products = await db.queryAsync(`SELECT * FROM products`);
+    const products = await db.queryAsync(`SELECT * FROM products LIMIT 20`);
     return products;
   },
   getOne: async function(id) {

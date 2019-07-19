@@ -32,7 +32,10 @@ app.get('/product-data', async (req, res) => {
 
 app.get('/product-data/:id', async (req, res) => {
   try {
-    //get products from db
+    const id = req.params.id;
+    if (id === undefined) {
+      res.status(404).send();
+    }
     const product = await products.getOne(req.params.id);
     res.status(200).end(JSON.stringify(product));
   } catch (error) {

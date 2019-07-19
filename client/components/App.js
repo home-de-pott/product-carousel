@@ -13,18 +13,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //add scripts to document
-    // this.appendStylesheet(
-    //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-    // );
-    // this.appendStylesheet(
-    //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-    // );
-
-    window.addEventListener('getProduct', event => {
-      this.getProducts(event.detail.id);
-    });
-    //if path includes id parameter, get related products
     const productId = window.location.pathname.slice(10);
     if (productId) {
       console.log('Component did mount. Getting', productId);
@@ -35,28 +23,11 @@ class App extends Component {
     }
   }
 
-  //clean this up
-  appendScript(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    script.async = true;
-    document.body.appendChild(script);
-  }
-
-  appendStylesheet(url) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.charset = 'UTF-8';
-    link.href = url;
-    document.head.appendChild(link);
-  }
-
   async getProducts(id) {
     console.log('gettingProduct', id);
     try {
       const products = await http.relatedProducts.get(id);
-      console.log('Got related products');
+      console.log('Got related products', products);
       if (!products) {
         console.log('no products');
         return;
@@ -77,7 +48,7 @@ class App extends Component {
         console.log('no recently viewed products');
         return;
       }
-      products = products.map(product => {
+      products = products.slice(0, 10).map(product => {
         return http.products.get(product.id);
       });
       Promise.all(products).then(products => {
