@@ -41,7 +41,7 @@
   border-radius: 50%;
   text-align: center;
 }
-
+/* 
 .carousel-item-brian {
   max-width: 200px;
   box-sizing: content-box;
@@ -69,6 +69,7 @@
 .carousel-item__description {
   line-height: 1em;
   height: 8rem;
+  overflow: scroll;
 }
 
 .carousel-item__brand {
@@ -79,7 +80,7 @@
   margin: 0 0 10px 0;
   font-size: 1rem;
   color: #f96302;
-}
+} */
 
 /* I am baffled by the failure of these selectors to work; resorting to inline styles */
 /* .carousel__empty-stars {
@@ -97,7 +98,7 @@
   left: 0;
   overflow: hidden;
 } */
-
+/* 
 .carousel-item__price {
   margin: 0 0 15px;
   height: 45px;
@@ -133,7 +134,7 @@
 .add-to-cart:hover {
   background: #f96302;
   color: #fff;
-}
+} */
 
 .scroll {
   z-index: 100;

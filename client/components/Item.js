@@ -15,7 +15,6 @@ class Item extends Component {
 
   async componentDidMount() {
     const reviews = await http.reviews.get(this.props.product.ID);
-    console.log('got reviews', reviews);
     const avgRating = this.getAvgRating(reviews);
     const numberOfRatings = reviews.length;
     this.setState({ avgRating, numberOfRatings });

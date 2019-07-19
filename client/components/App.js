@@ -13,7 +13,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(window.location.pathname);
     //add scripts to document
     // this.appendStylesheet(
     //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
@@ -21,6 +20,7 @@ class App extends Component {
     // this.appendStylesheet(
     //   'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
     // );
+
     window.addEventListener('getProduct', event => {
       this.getProducts(event.detail.id);
     });
@@ -71,17 +71,22 @@ class App extends Component {
   async getRecentlyViewed() {
     console.log('getting recently viewed');
     try {
-      const products = await http.recentlyViewedProducts.get();
-      console.log('Got recently viewed products');
+      let products = await http.recentlyViewedProducts.get();
+      console.log('Got recently viewed products', products);
       if (!products) {
         console.log('no recently viewed products');
         return;
       }
-      await this.setState({
-        products,
-        title: 'Recently viewed products...',
+      products = products.map(product => {
+        return http.products.get(product.id);
       });
-      return;
+      Promise.all(products).then(products => {
+        console.log(products);
+        this.setState({
+          products,
+          title: 'Recently viewed products...',
+        });
+      });
     } catch (error) {
       console.error(error);
     }
@@ -93,7 +98,9 @@ class App extends Component {
         <div className="carousel-title__container">
           <span className="carousel-title">{this.state.title}</span>
         </div>
-        <Carousel products={this.state.products} />
+        {this.state.products.length > 0 ? (
+          <Carousel products={this.state.products} />
+        ) : null}
       </div>
     );
   }

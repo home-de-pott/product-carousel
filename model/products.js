@@ -13,4 +13,10 @@ module.exports = {
     const products = await db.queryAsync(`SELECT * FROM products`);
     return products;
   },
+  getOne: async function(id) {
+    const product = await db.queryAsync(
+      `SELECT * FROM products WHERE ID = ${id}`
+    );
+    return product;
+  },
 };

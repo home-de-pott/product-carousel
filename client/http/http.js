@@ -1,18 +1,32 @@
 import axios from 'axios';
 
-const deploymentUrl =
-  'http://homedepottcarousel.us-east-2.elasticbeanstalk.com/product-data/';
+const carouselProduction =
+  'http://homedepottcarousel.us-east-2.elasticbeanstalk.com';
 
-const localUrl = 'http://localhost:3000/product-data/';
+const carouselDev = 'http://localhost:3000';
+const current = carouselDev;
+if(process.env.ENVIRONMENT === 'PRODUCTION'){
+  current = carouselProduction
+} 
 
 const reviewsApi =
   'http://homedepottreviews.us-east-2.elasticbeanstalk.com/reviews/';
 
 const http = {
+  products: {
+    get: async function(id) {
+      try {
+        const response = await axios.get(current + '/product-data/' + id);
+        return response.data[0];
+      } catch (error) {
+        console.error('error getting related products', error);
+      }
+    },
+  },
   relatedProducts: {
     get: async function(id) {
       try {
-        const response = await axios.get(deploymentUrl + id);
+        const response = await axios.get(current + '/related-products/' + id);
         return response.data;
       } catch (error) {
         console.error('error getting related products', error);

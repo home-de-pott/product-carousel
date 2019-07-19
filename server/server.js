@@ -31,6 +31,17 @@ app.get('/product-data', async (req, res) => {
 });
 
 app.get('/product-data/:id', async (req, res) => {
+  try {
+    //get products from db
+    const product = await products.getOne(req.params.id);
+    res.status(200).end(JSON.stringify(product));
+  } catch (error) {
+    console.error(error);
+    res.status(500).end();
+  }
+});
+
+app.get('/related-products/:id', async (req, res) => {
   const id = req.params.id;
   try {
     //get products from db
