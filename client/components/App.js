@@ -9,18 +9,20 @@ class App extends Component {
     this.state = {
       products: [],
       title: 'No recently viewed items...',
+      loading: true,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const productId = window.location.pathname.slice(10);
     if (productId) {
-      console.log('Component did mount. Getting', productId);
+      console.log('Carousel did mount. Getting', productId);
       this.setState({ title: 'Customers who viewed this item also bought...' });
-      this.getProducts(productId);
+      await this.getProducts(productId);
     } else {
-      this.getRecentlyViewed();
+      await this.getRecentlyViewed();
     }
+    this.setState({ loading: false });
   }
 
   async getProducts(id) {
@@ -44,7 +46,7 @@ class App extends Component {
     try {
       let products = await http.recentlyViewedProducts.get();
       console.log('Got recently viewed products', products);
-      if (!products) {
+      if (products.length === 0) {
         console.log('no recently viewed products');
         return;
       }
@@ -64,7 +66,9 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.state.loading ? (
+      <div className="spinner">&#128296;</div>
+    ) : (
       <div className="carousel">
         <div className="carousel-title__container">
           <span className="carousel-title">{this.state.title}</span>

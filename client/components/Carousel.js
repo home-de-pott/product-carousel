@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-import Item from './Item';
 import Arrow from './Arrow';
 import Product from 'hd-thumbnail';
 

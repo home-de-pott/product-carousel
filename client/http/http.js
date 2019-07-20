@@ -4,10 +4,10 @@ const carouselProduction =
   'http://homedepottcarousel.us-east-2.elasticbeanstalk.com';
 
 const carouselDev = 'http://localhost:3000';
-const current = carouselDev;
-if(process.env.ENVIRONMENT === 'PRODUCTION'){
-  current = carouselProduction
-} 
+const current = carouselProduction;
+if (process.env.ENVIRONMENT === 'DEV') {
+  current = carouselDev;
+}
 
 const reviewsApi =
   'http://homedepottreviews.us-east-2.elasticbeanstalk.com/reviews/';
@@ -27,6 +27,11 @@ const http = {
     get: async function(id) {
       try {
         const response = await axios.get(current + '/related-products/' + id);
+        console.log(response);
+        if (response.status >= 400) {
+          console.log('Not found from http');
+          window.dispatchEvent(new CustomEvent('notFound', {}));
+        }
         return response.data;
       } catch (error) {
         console.error('error getting related products', error);

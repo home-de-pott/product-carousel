@@ -1,10 +1,15 @@
 .carousel {
   font-family: helvetica-neue-light, Helvetica Neue, Helvetica, Arial,
     sans-serif;
-  margin: 8px;
+  padding: 8px 20px;
   color: #333;
   box-sizing: border-box;
   position: relative;
+}
+
+.slick-slider {
+  width: 95%;
+  margin: auto;
 }
 
 .carousel-title {
@@ -18,17 +23,18 @@
   border-bottom: 1px solid #999;
 }
 
-.slick-arrow.slick-prev {
-  background-color: #333;
-  color: #ccc;
+.slick-arrow.slick-prev.Brian-arrow {
   left: -10px;
-  z-index: 100;
+  z-index: 1;
 }
 
-.slick-arrow.slick-next {
-  background-color: #333;
-  color: #f96302;
+.slick-arrow.slick-next.Brian-arrow {
   right: 0;
+}
+
+.slick-next.Brian-arrow:before,
+.slick-prev.Brian-arrow:before {
+  color: #f96302;
 }
 
 .arrow {
