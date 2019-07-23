@@ -8,51 +8,32 @@ class App extends Component {
     super(props);
     this.state = {
       products: [],
+      title: 'No recently viewed items...',
+      loading: true,
     };
-    this.getRelatedProducts = this.getRelatedProducts.bind(this);
   }
 
-  componentDidMount() {
-    console.log(window.location.pathname);
-    //add scripts to document
-    this.appendStylesheet(
-      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-    );
-    this.appendStylesheet(
-      'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-    );
-    window.addEventListener('getProduct', event => {
-      this.getRelatedProducts(event.detail.id);
-    });
-    //if path includes id parameter, get related products
+  async componentDidMount() {
     const productId = window.location.pathname.slice(10);
     if (productId) {
-      console.log('Component did mount. Getting', productId);
-      this.getRelatedProducts(productId);
+      console.log('Carousel did mount. Getting', productId);
+      this.setState({ title: 'Customers who viewed this item also bought...' });
+      await this.getProducts(productId);
+    } else {
+      await this.getRecentlyViewed();
     }
+    this.setState({ loading: false });
   }
 
-  appendScript(url) {
-    const script = document.createElement('script');
-    script.src = url;
-    script.async = true;
-    document.body.appendChild(script);
-  }
-
-  appendStylesheet(url) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.charset = 'UTF-8';
-    link.href = url;
-    document.head.appendChild(link);
-  }
-
-  async getRelatedProducts(id) {
+  async getProducts(id) {
     console.log('gettingProduct', id);
     try {
-      const products = await http.productData.get(id);
-      console.log('Got related products');
+      const products = await http.relatedProducts.get(id);
+      console.log('Got related products', products);
+      if (!products) {
+        console.log('no products');
+        return;
+      }
       await this.setState({ products });
       return;
     } catch (error) {
@@ -60,13 +41,41 @@ class App extends Component {
     }
   }
 
+  async getRecentlyViewed() {
+    console.log('getting recently viewed');
+    try {
+      let products = await http.recentlyViewedProducts.get();
+      console.log('Got recently viewed products', products);
+      if (products.length === 0) {
+        console.log('no recently viewed products');
+        return;
+      }
+      products = products.slice(0, 10).map(product => {
+        return http.products.get(product.id);
+      });
+      Promise.all(products).then(products => {
+        console.log(products);
+        this.setState({
+          products,
+          title: 'Recently viewed products...',
+        });
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
-    return (
+    return this.state.loading ? (
+      <div className="spinner">&#128296;</div>
+    ) : (
       <div className="carousel">
-        <span className="carousel-title">
-          Customers Who Viewed This Item Bought...
-        </span>
-        <Carousel products={this.state.products} />
+        <div className="carousel-title__container">
+          <span className="carousel-title">{this.state.title}</span>
+        </div>
+        {this.state.products.length > 0 ? (
+          <Carousel products={this.state.products} />
+        ) : null}
       </div>
     );
   }

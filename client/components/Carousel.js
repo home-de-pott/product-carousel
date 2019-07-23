@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
-import Item from './Item';
 import Arrow from './Arrow';
+import Product from 'hd-thumbnail';
 
 function Carousel({ products }) {
   const settings = {
@@ -45,9 +45,9 @@ function Carousel({ products }) {
   };
   return (
     <Slider {...settings}>
-      {products.map(product => (
-        <Item key={product.ID} product={product} />
-      ))}
+      {products.map(product =>
+        product ? <Product key={product.ID} product={product} /> : null
+      )}
     </Slider>
   );
 }

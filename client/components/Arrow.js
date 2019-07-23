@@ -1,12 +1,11 @@
 import React from 'react';
 
-
 function Arrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
-      className={className}
-      style={{ ...style, display: "block"}}
+      className={className + ' ' + 'Brian-arrow'}
+      style={{ ...style, display: 'block' }}
       onClick={onClick}
     />
   );

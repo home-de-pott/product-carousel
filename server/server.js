@@ -31,9 +31,30 @@ app.get('/product-data', async (req, res) => {
 });
 
 app.get('/product-data/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (id === undefined) {
+      res.status(404).send();
+    }
+    const product = await products.getOne(req.params.id);
+    if (product.length === 0) {
+      res.status(400).end();
+    }
+    res.status(200).end(JSON.stringify(product));
+  } catch (error) {
+    console.error(error);
+    res.status(500).end();
+  }
+});
+
+app.get('/related-products/:id', async (req, res) => {
   const id = req.params.id;
   try {
     //get products from db
+    const product = await products.getOne(req.params.id);
+    if (product.length === 0) {
+      res.status(400).end();
+    }
     const relatedProducts = await products.getProductsRelatedTo(id);
     res.status(200).end(JSON.stringify(relatedProducts));
   } catch (error) {
@@ -43,3 +64,5 @@ app.get('/product-data/:id', async (req, res) => {
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+module.exports = app;
